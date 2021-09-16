@@ -1,0 +1,22 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(29, 29, 31, 0.3);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__title {
+    position: absolute;
+    top: 18px;
+    left: 26px;
+    color: white;
+    cursor: pointer;
+  }
+}
+.auth {
+  width: 500px;
+  height: 200px;
+  background-color: red;
+  opacity: 0.7;
+}

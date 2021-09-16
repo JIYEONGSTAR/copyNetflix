@@ -1,12 +1,8 @@
-import Food from "./components/Food";
-import "./index.scss";
+import Router from "./Router";
+import "./Styles/global.scss";
+import React from "react";
 function App() {
-  return (
-    <div>
-      <Food />
-      <Food />
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
