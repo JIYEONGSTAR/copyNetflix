@@ -1,25 +1,27 @@
-import React from "react";
-// import "./index.scss";
+import React, { useState } from "react";
 import "Pages/Auth/index.scss";
-const Auth = () => {
-  return (
-    <div className="wrapper">
-      <h1 className="wrapper__title">JYflix</h1>
+import SignIn from "Components/Auth/SignIn";
+import SignUp from "Components/Auth/SignUp";
+import { motion, AnimatePresence } from "framer-motion";
 
+const Auth = () => {
+  const [isSignIn, setIsSignIn] = useState(true);
+  const toggleIsSignIn = () => {
+    setIsSignIn(!isSignIn);
+  };
+  return (
+    <motion.div className="wrapper">
+      <h1 className="wrapper__title">JYflix</h1>
       <img className="wrapper__bg" src="/images/bg.jpg" alt="background" />
-      <div className="auth">
-        <span className="auth__title">Sign In</span>
-        <input className="auth__input" placeholder="Email"></input>
-        <input className="auth__input" placeholder="Password"></input>
-        <button className="auth__signinBtn auth__btn">Sign In</button>
-        <button className="auth__signinAnon auth__btn">
-          Sign In anonymously
-        </button>
-        <span className="auth__noti">
-          아직 가입하지 않으셨나요 ? <strong>회원가입</strong>
-        </span>
-      </div>
-    </div>
+      <button onClick={() => setIsSignIn(false)}>바꾸기</button>
+      <AnimatePresence initial exitBeforeEnter>
+        {isSignIn ? (
+          <SignIn key="signin" toggleIsSignIn={toggleIsSignIn} />
+        ) : (
+          <SignUp key="signup" toggleIsSignIn={toggleIsSignIn} />
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
