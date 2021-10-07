@@ -1,9 +1,12 @@
 import React from "react";
+import { useRecoilState } from "recoil";
+import { currentUserState } from "Store";
 
 const Browse = () => {
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
   return (
     <div>
-      <h1>나는 브라우즈</h1>
+      <h1>{currentUser}</h1>
     </div>
   );
 };

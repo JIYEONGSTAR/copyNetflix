@@ -5,7 +5,9 @@ import {
   defaultFadeInUpVariants,
   staggerFadeInUpVariants,
 } from "Constants/motions";
-
+import Input from "Components/Auth/Input";
+import { useRecoilState } from "recoil";
+import { currentUserState } from "Store";
 const SignIn = ({ toggleIsSignIn }) => {
   //   const [email, sertEmail] = useState("");
   //   const [password, setPassword] = useState("");
@@ -25,7 +27,13 @@ const SignIn = ({ toggleIsSignIn }) => {
     setInfo({ ...info, [id]: value });
   };
 
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
+  // user 관리 custom hook
+  // 브라우즈 접속할 때 로그인 안돼있으면 로그인으로
+  // 브라우즈 스타일링 > 영화 API
   const onSubmit = () => {
+    setCurrentUser(info.email);
+    console.log(`${info.email}님 환영합니다`);
     history.push("/browse");
   };
 
@@ -44,21 +52,21 @@ const SignIn = ({ toggleIsSignIn }) => {
       <motion.span className="auth__title" variants={defaultFadeInUpVariants}>
         Sign In
       </motion.span>
-      <motion.input
+
+      <Input
         id="email"
-        variants={defaultFadeInUpVariants}
-        className="auth__input"
         placeholder="Email"
+        value={info.email}
         onChange={onChange}
       />
-      <motion.input
+
+      <Input
         id="password"
-        variants={defaultFadeInUpVariants}
-        type="password"
-        className="auth__input"
         placeholder="Password"
+        value={info.password}
         onChange={onChange}
       />
+
       <motion.button
         className="auth__signinBtn auth__btn"
         variants={defaultFadeInUpVariants}
@@ -66,6 +74,7 @@ const SignIn = ({ toggleIsSignIn }) => {
       >
         Sign In
       </motion.button>
+
       <motion.button
         className="auth__signinAnon auth__btn"
         variants={defaultFadeInUpVariants}
