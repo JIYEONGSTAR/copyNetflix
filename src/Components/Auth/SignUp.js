@@ -1,10 +1,13 @@
-import {
-  staggerFadeInUpVariants,
-  staggerOne,
-} from "../../Constants/motions/index";
+import { staggerFadeInUpVariants } from "../../Constants/motions/index";
 import { motion } from "framer-motion";
-
+import Input from "./Input";
+import { defaultFadeInUpVariants } from "Constants/motions";
+import useCurrentUser from "../../Hooks/useCurrentUser";
+import { useState } from "react";
 const SignUp = ({ toggleIsSignIn }) => {
+  const [info, setInfo] = useState();
+  const { setCurrentUser } = useCurrentUser();
+
   return (
     <motion.div
       ket="signup"
@@ -14,11 +17,22 @@ const SignUp = ({ toggleIsSignIn }) => {
       animate="animate"
       exit="exit"
     >
-      <h1>나는회원가입</h1>
+      <motion.span className="auth__title" variants={defaultFadeInUpVariants}>
+        SignUp
+      </motion.span>
 
-      <span className="auth__noti">
+      <Input id="name" placeholder="Name" />
+      <Input id="email" placeholder="Email" />
+      <Input id="Password" placeholder="Password" />
+      <Input id="passwordConfirm" placeholder="Repeat Password" />
+
+      <motion.button className="auth__signinAnon auth__btn">
+        Sign Up
+      </motion.button>
+
+      <motion.span className="auth__noti">
         계정이 있으신가요 ? <strong onClick={toggleIsSignIn}>로그인</strong>
-      </span>
+      </motion.span>
     </motion.div>
   );
 };

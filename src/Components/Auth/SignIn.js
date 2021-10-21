@@ -6,8 +6,7 @@ import {
   staggerFadeInUpVariants,
 } from "Constants/motions";
 import Input from "Components/Auth/Input";
-import { useRecoilState } from "recoil";
-import { currentUserState } from "Store";
+import useCurrentUser from "Hooks/useCurrentUser";
 const SignIn = ({ toggleIsSignIn }) => {
   //   const [email, sertEmail] = useState("");
   //   const [password, setPassword] = useState("");
@@ -27,12 +26,14 @@ const SignIn = ({ toggleIsSignIn }) => {
     setInfo({ ...info, [id]: value });
   };
 
-  const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
+  //const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
+  const { setCurrentUser } = useCurrentUser(); //구조분해할당
+
   // user 관리 custom hook
   // 브라우즈 접속할 때 로그인 안돼있으면 로그인으로
   // 브라우즈 스타일링 > 영화 API
-  const onSubmit = () => {
-    setCurrentUser(info.email);
+  const onSubmit = async () => {
+    await setCurrentUser(info.email);
     console.log(`${info.email}님 환영합니다`);
     history.push("/browse");
   };
